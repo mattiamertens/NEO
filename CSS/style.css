@@ -1,54 +1,34 @@
 @font-face {
-    font-family: 'Berlin Grotesk';
-    src: url('fonts/BerlinGrotesk-Thin.eot');
-    src: url('fonts/BerlinGrotesk-Thin.eot?#iefix') format('embedded-opentype'),
-        url('fonts/BerlinGrotesk-Thin.woff2') format('woff2'),
-        url('fonts/BerlinGrotesk-Thin.woff') format('woff');
-    font-weight: 100;
+    font-family: 'Space Mono';
+    src: url('fonts/Space\ mono/SpaceMono-Regular.woff2') format('woff2'),
+        url('fonts/Space\ mono/SpaceMono-Regular.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: 'Berlin Grotesk';
-    src: url('fonts/BerlinGrotesk-Light.eot');
-    src: url('fonts/BerlinGrotesk-Light.eot?#iefix') format('embedded-opentype'),
-        url('fonts/BerlinGrotesk-Light.woff2') format('woff2'),
-        url('fonts/BerlinGrotesk-Light.woff') format('woff');
+    font-family: 'KH Teka';
+    src: url('fonts/KHTeka/KHTekaTRIAL-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: 'Berlin Grotesk';
-    src: url('fonts/BerlinGrotesk-Regular.eot');
-    src: url('fonts/BerlinGrotesk-Regular.eot?#iefix') format('embedded-opentype'),
-        url('fonts/BerlinGrotesk-Regular.woff2') format('woff2'),
-        url('fonts/BerlinGrotesk-Regular.woff') format('woff');
+    font-family: 'KH Teka';
+    src: url('fonts/KHTeka/KHTekaTRIAL-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: 'Berlin Grotesk';
-    src: url('fonts/BerlinGrotesk-Medium.eot');
-    src: url('fonts/BerlinGrotesk-Medium.eot?#iefix') format('embedded-opentype'),
-        url('fonts/BerlinGrotesk-Medium.woff2') format('woff2'),
-        url('fonts/BerlinGrotesk-Medium.woff') format('woff');
+    font-family: 'KH Teka';
+    src: url('fonts/KHTeka/KHTekaTRIAL-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Berlin Grotesk';
-    src: url('fonts/BerlinGrotesk-Bold.eot');
-    src: url('fonts/BerlinGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
-        url('fonts/BerlinGrotesk-Bold.woff2') format('woff2'),
-        url('fonts/BerlinGrotesk-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
+
 :root{
     --icon-previous: url('../assets/icons/previous.svg');
     --icon-next: url('../assets/icons/next.svg');
@@ -56,9 +36,8 @@
     --icon-info: url('../assets/icons/info.svg');
 
     --neutral_black: #000000;
-    --neutral_dk-grey: #272727;
-    --neutral_md-grey: #666;
-    --neutral_lt-grey: #999999;
+    --neutral_dk-grey: #656565;
+    --neutral_lt-grey: #919191;
     --neutral_white: #ffffff;
 
     --navbar-h: 46px;
@@ -790,17 +769,13 @@ video{
 }
 
 
-
-
-
-:root {
-    --line: #111114;
-    --line-soft: #c9c9cd;
-    --muted: #8a8a92;
-    --bg: #fdfdfc;
-    --accent: #111114;
-    --shelf-angle: 60deg;
-}
+:root{
+    --line:#111114;
+    --guide:#9a9aa0;
+    --muted:#8a8a92;
+    --bg:#fdfdfc;
+    --accent:#111114;
+} 
 
 * {
     box-sizing: border-box;
@@ -815,7 +790,7 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--accent);
-    font-family: -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-family: KH Teka;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
@@ -855,18 +830,28 @@ nav {
     flex-shrink: 0;
 }
 
+.hint {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+}
+
 /* ---------- stage ---------- */
 .stage-wrap {
     display: flex;
     justify-content: center;
-    padding: 2vh 20px 6vh;
+    padding: 1vh 20px 6vh;
 }
 
+/* aspect-ratio matches the source SVG's viewBox (906x822) exactly,
+     so every percentage below lines up with it at any screen size */
 .stage {
     position: relative;
-    width: min(760px, 92vw);
-    height: min(640px, 82vw);
-    perspective: 1700px;
+    width: min(780px, 94vw);
+    aspect-ratio: 906 / 822;
+    perspective: 1600px;
 }
 
 .tilt {
@@ -875,28 +860,28 @@ nav {
     transform-style: preserve-3d;
 }
 
-.shelf-anchor {
+/* the literal frame from drawer.svg, used verbatim */
+.frame {
     position: absolute;
-    left: 50%;
-    bottom: 158px;
-    transform: translateX(-50%);
-    width: min(620px, 82vw);
-    height: 1px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.frame path {
+    vector-effect: non-scaling-stroke;
 }
 
 .shelf {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 420px;
+    inset: 0;
     transform-style: preserve-3d;
 }
 
 .folder {
     position: absolute;
-    width: 100%;
-    left: 0;
+    left: 50%;
     cursor: pointer;
     transform-style: preserve-3d;
 }
@@ -909,36 +894,36 @@ nav {
 
 .folder-tab {
     position: absolute;
-    top: -24px;
-    width: 172px;
-    height: 34px;
+    bottom: 24px;
+    width: 44%;
+    min-width: 150px;
+    height: 32px;
     background: var(--bg);
     border: 1.4px solid var(--line);
     border-bottom: none;
     border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    overflow: hidden;
 }
 
 .folder-body {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 340px;
+    height: 34px;
     background: var(--bg);
     border: 1.4px solid var(--line);
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0 20px;
 }
 
 .folder-index {
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
     font-size: 12px;
     color: var(--muted);
-    opacity: 0;
-    transition: opacity .25s ease;
     white-space: nowrap;
 }
 
@@ -946,37 +931,13 @@ nav {
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.02em;
-    opacity: 0;
-    transition: opacity .25s ease;
     white-space: nowrap;
-}
-
-.folder.is-labeled .folder-index,
-.folder.is-labeled .folder-name,
-.folder:hover .folder-index,
-.folder:hover .folder-name,
-.folder:focus-visible .folder-index,
-.folder:focus-visible .folder-name {
-    opacity: 1;
-}
-
-/* ---------- drawer front ---------- */
-.drawer-front {
-    position: absolute;
-    left: 50%;
-    bottom: 40px;
-    width: min(700px, 90vw);
-    height: 130px;
-    transform: translateX(-50%);
-    background: var(--bg);
-    border: 1.4px solid var(--line);
-    clip-path: polygon(5% 0, 95% 0, 100% 100%, 0% 100%);
 }
 
 .drawer-pill {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 90.5%;
     transform: translate(-50%, -50%);
     padding: 10px 34px;
     border: 1.4px solid var(--line);
@@ -984,6 +945,7 @@ nav {
     font-size: 13px;
     letter-spacing: 0.16em;
     font-weight: 600;
+    background: var(--bg);
 }
 
 /* ---------- overlay ---------- */
@@ -1030,20 +992,4 @@ nav {
 .overlay-close:hover {
     background: var(--line);
     color: var(--bg);
-}
-
-.hint {
-    text-align: center;
-    color: var(--muted);
-    font-size: 12.5px;
-    letter-spacing: 0.04em;
-    margin-top: -30px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    .folder-index,
-    .folder-name {
-        transition: none;
-    }
 }

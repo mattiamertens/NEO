@@ -1,51 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEO ARTIFICIALE</title>
-    <link rel="stylesheet" href="CSS/style.css">    
-    <link rel="shortcut icon" href="assets/pics/favicon.png" type="image/x-icon"> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEO ARTIFICIALE</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="shortcut icon" href="assets/pics/favicon.png" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 
 <body>
+  <nav>
+    <div class="nav-links">
+      <a href="index.html">NEO</a>
+      <a href="lab.html">LAB</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+    <svg class="blob" viewBox="0 0 40 40" fill="var(--accent)">
+      <path d="M20 2c8 0 15 5 17 13 2 8-2 16-10 20-8 4-17 1-21-7C2 20 3 11 10 6c3-2 6-4 10-4z" />
+    </svg>
+  </nav>
 
-<nav>
-  <div class="nav-links">
-    <a href="#">NEO</a>
-    <a href="#">LAB</a>
-    <a href="#">ABOUT</a>
-    <a href="#">CONTACT</a>
-  </div>
-  <svg class="blob" viewBox="0 0 40 40" fill="var(--accent)">
-    <path d="M20 2c8 0 15 5 17 13 2 8-2 16-10 20-8 4-17 1-21-7C2 20 3 11 10 6c3-2 6-4 10-4z"/>
-  </svg>
-</nav>
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <div class="tilt" id="tilt">
 
-<div class="stage-wrap">
-  <div class="stage" id="stage">
-    <div class="tilt" id="tilt">
+        <!-- frame traced directly from drawer.svg -->
+        <svg class="frame" viewBox="0 0 906 822" preserveAspectRatio="none">
+          <path d="M777.139 0.464844L840.237 666.488H65.5371L127.958 0.464844H777.139Z" fill="none"
+            stroke="var(--guide)" stroke-width="0.93" />
+          <path
+            d="M901.889 666.732L904.619 682.667L904.771 684.033L851.703 821.383H56.2269L0.466797 684.184L0.618475 683.003L2.5554 666.732H901.889Z"
+            fill="var(--bg)" />
+          <path
+            d="M904.771 684.033L904.619 682.667L901.889 666.732H2.5554L0.618475 683.003L0.466797 684.184L56.2269 821.383H851.703L904.771 684.033ZM0.466797 684.184L904.771 684.033"
+            fill="none" stroke="var(--line)" stroke-width="0.91" />
+        </svg>
 
-      <div class="shelf-anchor">
         <div class="shelf" id="shelf"></div>
-      </div>
 
-      <div class="drawer-front">
         <div class="drawer-pill">NEO</div>
-      </div>
 
+      </div>
     </div>
   </div>
-</div>
 
-<div class="overlay" id="overlay">
-  <div class="overlay-index" id="overlayIndex">[01]</div>
-  <div class="overlay-name" id="overlayName">AURORA</div>
-  <button class="overlay-close" id="overlayClose">CLOSE</button>
-</div>
-
+  <div class="overlay" id="overlay">
+    <div class="overlay-index" id="overlayIndex">[01]</div>
+    <div class="overlay-name" id="overlayName">AURORA</div>
+    <button class="overlay-close" id="overlayClose">CLOSE</button>
+  </div>
 
 </body>
-<script type="module" src="main.js"></script> 
+<script type="module" src="main.js"></script>
+
 </html>
