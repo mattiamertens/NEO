@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO ARTIFICIALE</title>
+    <link rel="stylesheet" href="CSS/style.css">    
+    <link rel="shortcut icon" href="assets/pics/favicon.png" type="image/x-icon"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a href="#">NEO</a>
+    <a href="#">LAB</a>
+    <a href="#">ABOUT</a>
+    <a href="#">CONTACT</a>
+  </div>
+  <svg class="blob" viewBox="0 0 40 40" fill="var(--accent)">
+    <path d="M20 2c8 0 15 5 17 13 2 8-2 16-10 20-8 4-17 1-21-7C2 20 3 11 10 6c3-2 6-4 10-4z"/>
+  </svg>
+</nav>
+
+<div class="stage-wrap">
+  <div class="stage" id="stage">
+    <div class="tilt" id="tilt">
+
+      <div class="shelf-anchor">
+        <div class="shelf" id="shelf"></div>
+      </div>
+
+      <div class="drawer-front">
+        <div class="drawer-pill">NEO</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="overlay-index" id="overlayIndex">[01]</div>
+  <div class="overlay-name" id="overlayName">AURORA</div>
+  <button class="overlay-close" id="overlayClose">CLOSE</button>
+</div>
+
+
+</body>
+<script type="module" src="main.js"></script> 
+</html>
