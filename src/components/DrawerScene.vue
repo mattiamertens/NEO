@@ -90,7 +90,9 @@ function createScene(el) {
     const faceMaterial = new THREE.MeshBasicMaterial({ color: FALLBACK_GREY })
     lift.add(new THREE.Mesh(fill, faceMaterial))
     if (project.image) {
-      textureLoader.load(project.image, (texture) => {
+      // Prefix with the deploy base (e.g. /NEO/) so /public paths work on GitHub Pages.
+      const imageUrl = import.meta.env.BASE_URL + project.image.replace(/^\//, '')
+      textureLoader.load(imageUrl, (texture) => {
         if (disposed) return texture.dispose()
         texture.colorSpace = THREE.SRGBColorSpace
         faceMaterial.map = texture

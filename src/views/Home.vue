@@ -11,6 +11,6 @@ import DrawerScene from '@/components/DrawerScene.vue'
 <style scoped>
 .home {
   position: relative;
-  height: 100vh;
+  height: 100%;
 }
 </style>

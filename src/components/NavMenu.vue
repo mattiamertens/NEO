@@ -1,3 +1,7 @@
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
 <template>
     <nav>
         <div class="nav-links">
@@ -7,6 +11,6 @@
             <RouterLink to="/contact">CONTACT</RouterLink>
         </div>
         
-        <img class="blob" src="/neo.svg" alt="" />
+        <img class="blob" :src="`${base}neo.svg`" alt="" />
     </nav>
 </template>
