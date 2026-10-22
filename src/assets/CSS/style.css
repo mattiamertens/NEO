@@ -55,6 +55,12 @@ body, * {
 body{
     background-color: #EBEBEB;
 }
+/* Full-screen column: nav on top, the current view fills the rest. */
+#app{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 a{
     text-decoration: none;
 }
