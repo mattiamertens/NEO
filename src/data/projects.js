@@ -9,4 +9,7 @@ export const projects = [
   { slug: 'meridian', index: '04', brand: 'MERIDIAN' },
   { slug: 'oculus', index: '05', brand: 'OCULUS' },
   { slug: 'tide', index: '06', brand: 'TIDE' },
+  { slug: 'tide', index: '07', brand: 'TIDE' },
+  { slug: 'tide', index: '08', brand: 'TIDE' },
+  { slug: 'tide', index: '09', brand: 'TIDE' },
 ]
