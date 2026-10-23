@@ -304,8 +304,6 @@ function createScene(el) {
 
   function setHovered(folder) {
     if (folder === hovered) return
-    if (hovered) hovered.labelEl.style.fontWeight = '400'
-    if (folder) folder.labelEl.style.fontWeight = '500'
     el.style.cursor = folder ? 'pointer' : 'auto'
     hovered = folder
   }
@@ -385,7 +383,7 @@ function createScene(el) {
   // Lock the stack, let the neighbours slide apart (see tick), then navigate.
   function open(folder) {
     opening = folder
-    setHovered(folder) // keeps it lifted and bold, also on touch
+    setHovered(folder) // keeps it lifted, also on touch
     clearTimeout(snapTimer)
     scrollTarget = scroll
     openTimer = setTimeout(() => router.push(`/project/${folder.project.slug}`), OPEN_DURATION)
@@ -459,8 +457,7 @@ function createLabel(project) {
     gap: '8px',
     alignItems: 'center',
     whiteSpace: 'nowrap',
-    // KH Teka ships 300/400/500 (see style.css), so hover goes 400 → 500.
-    fontFamily: "'KH Teka', sans-serif",
+    fontFamily: 'SpaceMono',
     fontWeight: '400',
     fontSize: '15px',
     lineHeight: '1',
@@ -472,8 +469,10 @@ function createLabel(project) {
   })
   const index = document.createElement('span')
   index.textContent = `[ ${project.index} ]`
+  index.className = 'folder-label'
   const brand = document.createElement('span')
   brand.textContent = project.brand
+  brand.className = 'folder-label'
   labelText.append(index, brand)
   return labelText
 }
