@@ -1,10 +1,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { projects } from '@/data/projects'
+import { projects, labProjects } from '@/data/projects'
 
 const route = useRoute()
-const project = computed(() => projects.find((p) => p.slug === route.params.slug))
+const list = computed(() => (route.meta.section === 'lab' ? labProjects : projects))
+const project = computed(() => list.value.find((p) => p.slug === route.params.slug))
 </script>
 
 <template>
