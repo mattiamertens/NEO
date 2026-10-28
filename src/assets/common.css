@@ -1,0 +1,25 @@
+/* COMMON COMPONENTS */
+a{
+  letter-spacing: -4%;
+  transition: all .1s ease-in;
+}
+a:hover{
+  letter-spacing: 15%;
+  color: var(--accent);
+}
+.intro-grid{
+  height: calc(100vh - 104.5px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  padding: 0px 72px;
+}
+
+
+
+@media screen and (max-width: 576px){
+  .intro-grid{
+     grid-template-columns: 1fr;
+  }   
+
+}

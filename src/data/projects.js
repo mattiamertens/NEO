@@ -14,9 +14,4 @@ export const projects = [
   { slug: 'tide', index: '09', brand: 'TIDE' },
 ]
 
-// Placeholder Lab list (opened at /lab/:slug) — same shape as `projects`.
-// Covers live under public/projects/lab/ so they never share a path with the /lab routes.
-export const labProjects = [
-  { slug: 'prism', index: '01', brand: 'PRISM', image: '/projects/lab/prism/cover.jpg' },
-  { slug: 'echo', index: '02', brand: 'ECHO', image: '/projects/lab/echo/cover.jpg' },
-]
+// Lab projects live in ./labProjects.js

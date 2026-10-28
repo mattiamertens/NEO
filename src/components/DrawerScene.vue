@@ -21,9 +21,9 @@ const FOLDER_SCALE = 1.65
 // Spacing between neighbouring folders: each one further back recedes and rises.
 const STEP_Z = 0.4
 const STEP_Y = 0.03
-// Scroll speed, in folder slots per pixel of wheel / finger movement.
+// Wheel scroll speed, in folder slots per pixel. Drags don't need one: the stack
+// follows the pointer 1:1 (see measureSlotStep).
 const WHEEL_SPEED = 0.004
-const DRAG_SPEED = 0.008
 // Opening a folder: the folders in front of and behind it slide apart by this
 // many slots to give it room, then the route changes after OPEN_DURATION ms.
 const OPEN_GAP = 1.2
@@ -250,6 +250,7 @@ function createScene(el) {
     camera.updateMatrixWorld()
     scrollable = stackOverflows()
     if (!scrollable) scroll = scrollTarget = 0
+    measureSlotStep(width, height)
     updateRing()
   }
 
@@ -288,18 +289,30 @@ function createScene(el) {
     }
     return false
   }
+
+  // On-screen movement (in px) of a folder going one slot back. Dragging projects
+  // the pointer movement onto this axis, so the stack slides with the pointer.
+  const slotStepPx = new THREE.Vector2()
+  const slotA = new THREE.Vector3()
+  const slotB = new THREE.Vector3()
+  function measureSlotStep(width, height) {
+    slotPosition(0, slotA).applyMatrix4(fit.matrixWorld).project(camera)
+    slotPosition(1, slotB).applyMatrix4(fit.matrixWorld).project(camera)
+    slotStepPx.set(((slotB.x - slotA.x) / 2) * width, (-(slotB.y - slotA.y) / 2) * height)
+  }
+
   const resizeObserver = new ResizeObserver(resize)
   resizeObserver.observe(el)
   resize()
 
-  // ---- Pointer: hover, click, wheel / touch-drag scrolling ----
+  // ---- Pointer: hover, click, wheel / drag scrolling ----
   const pointer = new THREE.Vector2()
   const raycaster = new THREE.Raycaster()
   let mouseInside = false
-  let dragX = 0 // last touch position while dragging
+  let dragX = 0 // last pointer position while dragging
   let dragY = 0
   let dragging = false
-  let dragDistance = 0 // total finger travel, to tell a tap from a swipe
+  let dragDistance = 0 // total pointer travel, to tell a tap/click from a drag
   let dragVelocity = 0 // last frame's scroll delta, for a little fling on release
 
   function setHovered(folder) {
@@ -332,25 +345,29 @@ function createScene(el) {
   }
 
   function onPointerDown(e) {
-    if (e.pointerType === 'mouse' || !scrollable || opening) return
+    dragDistance = 0
+    if (e.button !== 0 || !scrollable || opening) return
     dragging = true
     dragX = e.clientX
     dragY = e.clientY
-    dragDistance = 0
     dragVelocity = 0
     clearTimeout(snapTimer)
+    // Keep receiving moves if the mouse leaves the scene mid-drag.
+    el.setPointerCapture(e.pointerId)
   }
 
   function onPointerMove(e) {
     if (dragging) {
-      // Same as the wheel: swiping up (scrolling down) or left brings the back
-      // folders forward; swiping down or right sends them back.
+      // Grab the stack: only movement along its on-screen axis counts, converted
+      // to slots, so the folders stay under the pointer.
       const dx = e.clientX - dragX
       const dy = e.clientY - dragY
       dragX = e.clientX
       dragY = e.clientY
       dragDistance += Math.hypot(dx, dy)
-      dragVelocity = (-dy - dx) * DRAG_SPEED
+      if (dragDistance > 10) el.style.cursor = 'grabbing'
+      const stepSq = slotStepPx.lengthSq()
+      dragVelocity = stepSq ? -(dx * slotStepPx.x + dy * slotStepPx.y) / stepSq : 0
       scrollTarget += dragVelocity
       return
     }
@@ -364,6 +381,7 @@ function createScene(el) {
     if (!dragging) return
     dragging = false
     scrollTarget = Math.round(scrollTarget + dragVelocity * 6)
+    el.style.cursor = hovered ? 'pointer' : 'auto'
   }
 
   function onPointerLeave() {
@@ -410,7 +428,7 @@ function createScene(el) {
     if (opening) spread = lerp(spread, 1, 0.22)
     placeFolders()
     // The stack slides under a still mouse while scrolling, so re-check the hover.
-    if (moving && mouseInside && !opening) setHovered(pick())
+    if (moving && mouseInside && !opening && !dragging) setHovered(pick())
 
     // Hovered folder eases up, the others ease back down.
     for (const f of folders) {

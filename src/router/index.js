@@ -10,8 +10,10 @@ const router = createRouter({
         { path: '/about', name: 'about', component: () => import('../views/About.vue'), meta: { section: 'about' } },
         { path: '/contact', name: 'contact', component: () => import('../views/Contacts.vue'), meta: { section: 'contact' } },
         { path: '/project/:slug', name: 'project', component: () => import('../views/Project.vue'), meta: { section: 'home' } },
-        { path: '/lab/:slug', name: 'lab-project', component: () => import('../views/Project.vue'), meta: { section: 'lab' } },
+        { path: '/lab/:slug', name: 'lab-project', component: () => import('../views/LabProject.vue'), meta: { section: 'lab' } },
     ],
+    // Every page opens at the top (back/forward keeps the previous position).
+    scrollBehavior: (to, from, savedPosition) => savedPosition || { top: 0 },
 })
 
 export default router
