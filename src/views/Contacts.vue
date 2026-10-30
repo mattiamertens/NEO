@@ -27,4 +27,11 @@
   .intro-grid div{
     height: 100%;
   }
+
+  @media screen and (max-width: 576px){
+  .intro-grid{
+    padding: 32px 16px;
+  }   
+
+}
 </style>

@@ -342,6 +342,42 @@ nav {
     -webkit-text-stroke: 1px var(--selected);
 }
 
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px){
+    nav {
+        position: relative;
+        padding: 24px 16px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Links become a pop-up panel under the bar, shown only while open. */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px 16px;
+        background: var(--bg);
+    }
+
+    nav.is-open .nav-links {
+        display: flex;
+    }
+}
+
 
 /* --------- LAB --------- */
 .lab-grid{
@@ -353,5 +389,11 @@ nav {
     padding: 144px 72px 0;
 }
 @media (max-width: 1200px) {
-     .lab-grid { --cols: 4; } 
+    .lab-grid { --cols: 4; } 
+}
+@media (max-width: 576px) {
+    .lab-grid { 
+        --cols: 2; 
+        padding: 32px 16px;
+    } 
 }

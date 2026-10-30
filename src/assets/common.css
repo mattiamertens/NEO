@@ -19,7 +19,9 @@ a:hover{
 
 @media screen and (max-width: 576px){
   .intro-grid{
-     grid-template-columns: 1fr;
+    height: calc(100vh - 48px);
+    grid-template-columns: 1fr;
+    padding: 32px 16px;
   }   
 
 }
